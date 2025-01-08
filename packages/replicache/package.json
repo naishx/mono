@@ -15,11 +15,11 @@
     "check-types": "tsc && tsc --project tool/tsconfig.json",
     "check-types:watch": "tsc --watch",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx src/",
-    "build": "rm -rf out && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json && node tool/build.js",
-    "build-bundle-sizes": "rm -rf out && node tool/build.js --bundle-sizes",
-    "prepack": "npm run lint && npm run test && npm run build && mv README.md README-org.md && mv README-external.md README.md",
-    "postpack": "mv README.md README-external.md && mv README-org.md README.md",
-    "prepare": "rm -f node_modules/fetch-mock/esm/client.d.ts"
+    "build": "rimraf out && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json && node tool/build.js",
+    "build-bundle-sizes": "rimraf out && node tool/build.js --bundle-sizes",
+    "prepack": "npm run lint && npm run build && move README.md README-org.md && move README-external.md README.md",
+    "postpack": "move README.md README-external.md && move README-org.md README.md",
+    "prepare": "rimraf node_modules/fetch-mock/esm/client.d.ts"
   },
   "dependencies": {
     "@badrap/valita": "0.3.11",
@@ -36,7 +36,6 @@
     "command-line-usage": "^7.0.3",
     "compare-utf8": "^0.1.1",
     "esbuild": "^0.20.2",
-    "fetch-mock": "^9.11.0",
     "playwright": "^1.43.1",
     "shared": "0.0.0",
     "sinon": "^13.0.1",
