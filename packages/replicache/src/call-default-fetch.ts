@@ -8,6 +8,7 @@ export async function callDefaultFetch<Body>(
   auth: string,
   requestID: string,
   requestBody: Body,
+  customHeaders: { [key: string] : string; },
 ): Promise<readonly [Response | undefined, HTTPRequestInfo]> {
   const init = {
     headers: {
@@ -17,7 +18,8 @@ export async function callDefaultFetch<Body>(
       'Authorization': auth,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       'X-Replicache-RequestID': requestID,
-    },
+      ...customHeaders
+    },    
     body: JSON.stringify(requestBody),
     method: 'POST',
   };

@@ -28,6 +28,12 @@ export interface ReplicacheOptions<MD extends MutatorDefs> {
   auth?: string | undefined;
 
   /**
+   * This custom headers added to the requests
+   */
+
+  customHeaders: { [key: string]: string; };
+
+  /**
    * This is the URL to the server endpoint dealing with pull. See [Pull
    * Endpoint Reference](https://doc.replicache.dev/reference/server-pull) for more
    * details.

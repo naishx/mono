@@ -199,6 +199,9 @@ export class ReplicacheImpl<MD extends MutatorDefs = {}> {
   /** The authorization token used when doing a push request. */
   auth: string;
 
+  /** The custom headers. */
+  customHeaders: { [key: string] : string; };
+
   /** The name of the Replicache database. Populated by {@link ReplicacheOptions#name}. */
   readonly name: string;
 
@@ -385,6 +388,7 @@ export class ReplicacheImpl<MD extends MutatorDefs = {}> {
       logSinks = [consoleLogSink],
       pullURL = '',
       auth,
+      customHeaders,
       pushDelay = 10,
       pushURL = '',
       schemaVersion = '',
@@ -404,6 +408,7 @@ export class ReplicacheImpl<MD extends MutatorDefs = {}> {
       enableClientGroupForking = true,
     } = implOptions;
     this.auth = auth ?? '';
+    this.customHeaders = customHeaders ?? {},
     this.pullURL = pullURL;
     this.pushURL = pushURL;
     this.name = name;

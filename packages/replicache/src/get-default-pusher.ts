@@ -9,7 +9,7 @@ import type {PushRequest} from './sync/push.js';
 /**
  * This creates a default pusher which uses HTTP POST to send the push request.
  */
-export function getDefaultPusher(rep: {pushURL: string; auth: string}): Pusher {
+export function getDefaultPusher(rep: {pushURL: string; auth: string, customHeaders: { [key: string] : string; }}): Pusher {
   async function pusher(
     requestBody: PushRequest,
     requestID: string,
@@ -19,6 +19,7 @@ export function getDefaultPusher(rep: {pushURL: string; auth: string}): Pusher {
       rep.auth,
       requestID,
       requestBody,
+      rep.customHeaders
     );
     if (!response) {
       return {httpRequestInfo};

@@ -26,7 +26,7 @@ import type {PullRequest} from './sync/pull.js';
 /**
  * This creates a default puller which uses HTTP POST to send the pull request.
  */
-export function getDefaultPuller(rep: {pullURL: string; auth: string}): Puller {
+export function getDefaultPuller(rep: {pullURL: string; auth: string, customHeaders: { [key: string] : string; }}): Puller {
   async function puller(
     requestBody: PullRequest,
     requestID: string,
@@ -36,6 +36,7 @@ export function getDefaultPuller(rep: {pullURL: string; auth: string}): Puller {
       rep.auth,
       requestID,
       requestBody,
+      rep.customHeaders
     );
     if (!response) {
       return {httpRequestInfo};
